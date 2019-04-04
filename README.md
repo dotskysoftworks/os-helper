@@ -1,5 +1,6 @@
 # os-helper
-Current version: v0.0.0-prealpha
+Current stable version: v0.0.0-prealpha
+Current unstable version: v0.0.1-dev-prealpha
 
 Helper application for Operating Systems course.
 DISCLAIMER: Supplementary content, not intended to replace any course materials.
