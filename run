@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Setup screen, to keep the window in 80x24
+
+SETUP=`cat src/screen/setup.scr`
+
+printf "\ec"
+printf "$SETUP"
+
