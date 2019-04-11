@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# screen to display materials
+
+DISP_MAT=$1
+STAT=1
+PAGE=1
+MAX=1
+
+chk_set()
+{
+	CHK=`printf "%02d" $1`
+	CHK_DIR=`cat "$DISP_MAT/$CHK.scr"`
+}
+while :
+do
+	chk $MAX
+	if [$CHK_DIR != ""] then
+		MAX=$MAX + 1
+	else
+		break
+	fi
+done
+	
+whlie [ $STAT = 1 ]
+do
+	PAGE_DIR=`printf "%02d" $PAGE`
+	MAX_DIR=`printf "%02d" $MAX`
+	PAGE_DISP=`cat "$DISP_MAT/$PAGE_DIR.scr"`
+
+	printf "\ec"
+	printf "$PAGE_DISP"
+	printf "  Page $PAGE_DIR of $MAX_DIR\n"
+	printf "  Press the left and right arrow to navigate, Q to quit\n\n"
+	
+	read -rsn1 INPUT
+
+	case $INPUT in
+		^[[C)			
+			chk $PAGE+1
+
+			if [ $CHK_DIR != "" ]
+			then
+				PAGE=$PAGE + 1
+			fi
+		;;
+		^[[D)
+			chk $PAGE-1
+
+			if [ $CHK_DIR != "" ]
+			then
+				PAGE=$PAGE - 1
+			fi
+			;;
+		q)
+			STAT=0
+			;;
+	esac
+done

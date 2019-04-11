@@ -6,4 +6,6 @@ SETUP=`cat src/screen/setup.scr`
 
 printf "\ec"
 printf "$SETUP"
+read -rsn1 buffer
 
+./src/home

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# display home screen
+
+HOME_SCR=`cat src/screen/home.scr`
+
+STAT=1
+
+while [ $STAT = 1 ]
+do
+
+	printf "\ec"
+	printf "$HOME_SCR"
+
+	read -rsn1 INPUT
+
+	case $INPUT in
+		a)
+			./src/about
+			;;
+		q)
+			STAT=0
+			;;
+	esac
+done
+
+printf "\ec"

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# displays about screen
+
+ABOUT=`cat src/screen/about.scr`
+
+printf "\ec"
+printf "$ABOUT"
+
+read -rsn1 BUFFER
