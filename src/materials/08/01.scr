@@ -1,0 +1,10 @@
+WHERE SHOULD I START WITH?
+
+Let's start with CPU-I/O bursts. CPU/I-O bursts are basically what happened
+continually in the PC of yours that you are currently using right now. Each
+cycle consists of, well, a CPU burst and an I/O burst.
+
+A CPU burst happens when the CPU is processing something, even small
+processes that may seem instant. While an I/O burst happen when the CPU is
+waiting for I/O. For this material about scheduling, we're concerned about
+the CPU burst.

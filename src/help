@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# displays help screen
+
+HELP=`cat src/screen/help.scr`
+
+printf "\ec"
+printf "$HELP"
+
+read -rsn1 BUFFER

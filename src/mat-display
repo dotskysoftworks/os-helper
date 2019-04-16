@@ -1,0 +1,128 @@
+#!/bin/bash
+
+# screen to display materials
+
+DISP_MAT=$1
+STAT=1
+PAGE=1
+MAX=0
+
+START_DISP=3
+END_DISP=20
+
+chk_set()
+{
+	CHK=`printf "%02d" $1`
+	CHK_DIR=`cat "$DISP_MAT/$CHK.scr"`
+}
+while :
+do
+	NEXT=`expr $MAX + 1`
+	chk_set "$NEXT"
+	if [ "$CHK_DIR" != "" ]; then
+		MAX=`expr $MAX + 1`
+	else
+		break
+	fi
+done
+	
+while [ $STAT = 1 ]
+do
+	PAGE_DIR=`printf "%02d" $PAGE`
+	MAX_DIR=`printf "%02d" $MAX`
+	TITLE=`sed -e 's/^/  /' -e '1q;d' $DISP_MAT/$PAGE_DIR.scr`
+	PAGE_LEN=`wc -l $DISP_MAT/$PAGE_DIR.scr | awk '{ print $1 }'`
+	
+	LOOP=`expr 20 - $PAGE_LEN`
+
+	if [ $START_DISP -gt 3 ] && [ $PAGE_LEN -gt 20 ]
+	then
+		HEAD=`sed -e 's/^/ \^/' -e "${START_DISP}q;d" $DISP_MAT/$PAGE_DIR.scr`
+	elif [ $PAGE_LEN -gt 20 ]
+	then
+		HEAD=`sed -e 's/^/  /' -e "${START_DISP}q;d" $DISP_MAT/$PAGE_DIR.scr`
+	else
+		HEAD=""
+	fi
+
+	if [ $END_DISP -lt $PAGE_LEN ] && [ $PAGE_LEN -gt 20 ]
+	then
+		TAIL=`sed -e 's/^/ v/' -e "${END_DISP}q;d" $DISP_MAT/$PAGE_DIR.scr`
+	elif [ $PAGE_LEN -gt 20 ]
+	then
+		TAIL=`sed -e 's/^/  /' -e "${END_DISP}q;d" $DISP_MAT/$PAGE_DIR.scr`
+	else
+		TAIL=""
+	fi
+		
+	if [ $PAGE_LEN -le 20 ]
+	then
+		CONTENT=`sed -e 's/^/  /' -e '1,2d' $DISP_MAT/$PAGE_DIR.scr`
+	else
+		CONTENT=`sed -e 's/^/  /' -e "${END_DISP}"',\$d' -e "1,${START_DISP}d" $DISP_MAT/$PAGE_DIR.scr`
+	fi
+	
+	printf "\ec\n"
+	printf "$TITLE\n\n"
+	if [ "$HEAD" != "" ]
+	then
+		printf "$HEAD\n"
+	fi
+	printf "$CONTENT\n"
+	if [ "$TAIL" != "" ]
+	then
+		printf "$TAIL\n"
+	fi
+	
+	while [ $LOOP -gt 0 ]
+	do
+		printf "\n"
+		LOOP=`expr $LOOP - 1`
+	done
+
+	printf "\n  Page $PAGE_DIR of $MAX_DIR\n"
+
+	read -rsn1 INPUT
+
+	case $INPUT in
+		.)			
+			PAGE_PLUS=`expr $PAGE + 1`
+			chk_set "$PAGE_PLUS"
+
+			if [ "$CHK_DIR" != "" ]
+			then
+				PAGE=$PAGE_PLUS
+				START_DISP=3
+				END_DISP=20
+			fi
+			;;
+		,)
+			PAGE_MINUS=`expr $PAGE - 1`
+			chk_set $PAGE_MINUS
+
+			if [ "$CHK_DIR" != "" ]
+			then
+				PAGE=$PAGE_MINUS
+				START_DISP=3
+				END_DISP=20
+			fi
+			;;
+		a)
+			if [ $START_DISP -gt 3 ]
+			then
+				START_DISP=`expr $START_DISP - 1`
+				END_DISP=`expr $END_DISP - 1`
+			fi
+			;;
+		z)
+			if [ $END_DISP -lt $PAGE_LEN ]
+			then
+				START_DISP=`expr $START_DISP + 1`
+				END_DISP=`expr $END_DISP + 1`
+			fi
+			;;
+		q)
+			STAT=0
+			;;
+	esac
+done
