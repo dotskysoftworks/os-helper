@@ -1,0 +1,21 @@
+SCHEDULING ALGORITHMS
+
+There are a bunch of algorithms for scheduling. There are FCFS, SJF, SRTF,
+RR, and more.
+
+FCFS stands for First Come, First Served. So, the earliest processes that
+came to the waiting list are worked on first. This is probably the simplest.
+First in, first out.
+
+SJF stands for Shortest Job First. So, the job that took the shortest to
+work on are being worked on earliest. While this can be the ideal way in a
+user standpoint since the quickest job was done the earliest, in reality we
+don't even know how long a process may take unless we run it.
+
+A preemptive variant of SJF is called SRTF, or Shortest Remaining Time First.
+
+Round Robin (RR), tries to take a middle ground between the two. Basically
+how it works is first, a certain duration of time is decided. Then, the
+processes that come first is being worked on, but if it took longer than the
+time set than it got held, put back on the end of the list, then the next
+process is worked on. So on and so forth.

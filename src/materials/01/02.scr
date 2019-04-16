@@ -1,0 +1,17 @@
+WHAT IS BASH?
+
+Bash (or Bourne Again Shell) is a GNU version of the Bourne shell. It's
+basically the main shell for most (if not all) distributions of Linux.
+
+This program is made using the Bash shell script language and C language,
+though most of the time you just need to know the commands and not needing
+to write a Bash script.
+
+Commands that you probably need to know:
+
+./<x> (alternatively, bash <x>): execute an executable named <x>.
+ls: list the files in current directory
+ls -aF: list all the files (including the hidden ones) in current directory
+cd <dir>: change directory to <dir>.
+touch <file>: Create a file called <file>.
+cp <file> <dir>: Copy a file called <file> to directory <dir>.

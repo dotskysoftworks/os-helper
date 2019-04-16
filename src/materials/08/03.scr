@@ -1,0 +1,26 @@
+WHAT ABOUT THIS SCHEDULING THINGY, THEN?
+
+Well, CPU scheduling can help control the bursts of the CPU. The processes
+are scheduled so more short bursts can be achieved.
+
+Inside the CPU is a scheduler. A scheduler is the one that controls which
+processes in the ready queue that will be processed by the CPU and which
+core that will process it. Think of it as the boss who tells which worker
+to work and which job to work on.
+
+There are two types of scheduling, which is preemptive and non-preemptive
+scheduling. Non-preemptive scheduling happens when a process switches from
+running to waiting states and when it terminates. Preemptive scheduling
+happens when a process switches from running to ready states and from
+waiting to ready states.
+
+There's also the dispatcher. A dispatcher is the one that gives control of
+the CPU to the process selected by the (short term) scheduler. Dispatching
+involves:
+
+- Switching context
+- Switching to user mode
+- Jumping to the proper location in the user program to restart the program
+
+It will take time to do this. The time needed to do the things above is
+called dispatch latency.

@@ -21,6 +21,12 @@ do
 		q)
 			STAT=0
 			;;
+		h)
+			./src/help
+			;;
+		[1-9])
+			REF=`printf "%02d" $INPUT`
+			./src/mat-display src/materials/$REF/
 	esac
 done
 

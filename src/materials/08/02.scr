@@ -1,0 +1,15 @@
+WHY CPU BURST?
+
+Well, CPU bursts must happen in shorter durations more often than in longer
+durations. Why? Because in shorter bursts I/O bursts can happen more often,
+increasing responsiveness of the computer.
+
+Not getting it? Imagine this: You need a help from a friend to get you a
+drink and some papers, but instead of bringing you the drink and the
+papers at the same time, they got you a drink first, come back, then got you
+the papers?
+
+Or telling your dog to fetch the stick that you threw, but you need to wait
+for it to finish playing with the ball?
+
+Those would suck, right? Same with your computer.
